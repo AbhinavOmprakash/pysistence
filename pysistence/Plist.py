@@ -40,10 +40,15 @@ class Plist(IPersistent):
                 current = self.head
             else:
                 current.next = ListNode(element)
+                
                 current = current.next
+        self.tail = current
 
     def __iter__(self):
         current = self.head
         while current:
             yield current.value
             current = current.next
+
+    def __len__(self):
+        return self.length
