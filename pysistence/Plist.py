@@ -13,6 +13,10 @@ class ListNode:
     def __init__(self, value: Any, nextNode: ListNode = None) -> None:
         self.value = value
         self.next = nextNode
+    
+    
+    def __eq__(self, node):
+        return self.value == node.value
 
 
 class Plist(IPersistent):
@@ -43,6 +47,25 @@ class Plist(IPersistent):
                 
                 current = current.next
         self.tail = current
+
+    def cons(self, value):
+        
+        new_plist=Plist([value])
+        new_plist.head.next=self.head
+        new_plist.tail=self.tail
+        new_plist.length = self.length + 1
+        return new_plist
+
+    def conj(self, value):
+        pass
+    
+    
+    def concat(self, value):
+        pass
+    
+    def __repr__(self):
+        return f"Plist{[i for i in self]}"
+
 
     def __iter__(self):
         current = self.head
