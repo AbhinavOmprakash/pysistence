@@ -13,8 +13,7 @@ class ListNode:
     def __init__(self, value: Any, nextNode: ListNode = None) -> None:
         self.value = value
         self.next = nextNode
-    
-    
+
     def __eq__(self, node):
         return self.value == node.value
 
@@ -44,43 +43,44 @@ class Plist(IPersistent):
                 current = self.head
             else:
                 current.next = ListNode(element)
-                
+
                 current = current.next
         self.tail = current
 
     def cons(self, value):
-        new_plist=Plist([value])
-        new_plist.head.next=self.head
-        new_plist.tail=self.tail
+        new_plist = Plist([value])
+        new_plist.head.next = self.head
+        new_plist.tail = self.tail
         new_plist.length = self.length + 1
 
         return new_plist
 
     def conj(self, value):
-        return self.cons(value)# Conj and cons is same for link list
-        
-    
+        return self.cons(value)  # Conj and cons is same for link list
+
     def concat(self, value):
         # make new list, copy self's head new list
-        new_plist=Plist([self.head.value])
+        new_plist = Plist([self.head.value])
         # sets self tail to point to new tail
-        self.tail.next=ListNode(value)
+        self.tail.next = ListNode(value)
         # Set the value of the new list's tail
-        new_plist.tail=self.tail.next
+        new_plist.tail = self.tail.next
         new_plist.length = self.length + 1
         return new_plist
 
-    
+    # def insert(self,index, value):
+    #     new_plist=self.head
+    #     new_plist.tail=self.tail
+
     def __repr__(self):
         return f"Plist{[i for i in self]}"
-
 
     def __iter__(self):
         current = self.head
         while current is not self.tail:
             yield current.value
             current = current.next
-        yield current.value # Tail's value
+        yield current.value  # Tail's value
 
     def __len__(self):
         return self.length
