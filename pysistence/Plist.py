@@ -49,19 +49,27 @@ class Plist(IPersistent):
         self.tail = current
 
     def cons(self, value):
-        
         new_plist=Plist([value])
         new_plist.head.next=self.head
         new_plist.tail=self.tail
         new_plist.length = self.length + 1
+
         return new_plist
 
     def conj(self, value):
-        pass
-    
+        return self.cons(value)# Conj and cons is same for link list
+        
     
     def concat(self, value):
-        pass
+        # make new list, copy self's head new list
+        new_plist=Plist([self.head.value])
+        # sets self tail to point to new tail
+        self.tail.next=ListNode(value)
+        # Set the value of the new list's tail
+        new_plist.tail=self.tail.next
+        new_plist.length = self.length + 1
+        return new_plist
+
     
     def __repr__(self):
         return f"Plist{[i for i in self]}"
@@ -69,9 +77,10 @@ class Plist(IPersistent):
 
     def __iter__(self):
         current = self.head
-        while current:
+        while current is not self.tail:
             yield current.value
             current = current.next
+        yield current.value # Tail's value
 
     def __len__(self):
         return self.length
