@@ -35,9 +35,9 @@ def test_concat():
     plist = Plist([1, 2, 3])
     concatenated_list = plist.concat(4)
     assert concatenated_list.tail.value == 4
-    assert len(concatenated_list) > len(plist)
     assert concatenated_list.head == plist.head
     assert concatenated_list.tail != plist.tail
+    assert len(concatenated_list) > len(plist)
 
 
 def test_representation():

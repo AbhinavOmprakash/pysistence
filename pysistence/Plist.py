@@ -46,6 +46,9 @@ class Plist(IPersistent):
 
                 current = current.next
         self.tail = current
+    
+    def _copy_self(self):
+        
 
     def cons(self, value):
         new_plist = Plist([value])
@@ -72,8 +75,7 @@ class Plist(IPersistent):
     #     new_plist=self.head
     #     new_plist.tail=self.tail
 
-    def __repr__(self):
-        return f"Plist{[i for i in self]}"
+    
 
     def __iter__(self):
         current = self.head
@@ -81,6 +83,11 @@ class Plist(IPersistent):
             yield current.value
             current = current.next
         yield current.value  # Tail's value
+
+    def __repr__(self):
+        # iteration yields the value of the Node
+        # not the node object
+        return f"Plist{[i for i in self]}"
 
     def __len__(self):
         return self.length
