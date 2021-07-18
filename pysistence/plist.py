@@ -6,7 +6,7 @@ from .ipersistent import IPersistent
 
 @final
 class ListNode:
-    """This node class to be used with persistent linked list.
+    """This node class will be used with the persistent linked list.
     Added in version: 0.1.0
     """
 
@@ -32,7 +32,10 @@ class Plist(IPersistent):
         self._construct(iterable)
 
     def _construct(self, iterable: Iterable) -> None:
-        """Construct linked list from iterable."""
+        """Construct linked list from iterable.
+        
+        Added in version: 0.1.0
+        """
 
         # TODO refactor. ugly
         current = None
@@ -48,9 +51,13 @@ class Plist(IPersistent):
         self.tail = current
     
     def _copy_self(self):
+
+        """Added in version: 0.1.0"""
+        pass
         
 
     def cons(self, value):
+        """Added in version: 0.1.0"""
         new_plist = Plist([value])
         new_plist.head.next = self.head
         new_plist.tail = self.tail
@@ -59,9 +66,11 @@ class Plist(IPersistent):
         return new_plist
 
     def conj(self, value):
+        """Added in version: 0.1.0"""
         return self.cons(value)  # Conj and cons is same for link list
 
     def concat(self, value):
+        """Added in version: 0.1.0"""
         # make new list, copy self's head new list
         new_plist = Plist([self.head.value])
         # sets self tail to point to new tail
@@ -78,6 +87,7 @@ class Plist(IPersistent):
     
 
     def __iter__(self):
+        """Added in version: 0.1.0"""
         current = self.head
         while current is not self.tail:
             yield current.value
@@ -85,9 +95,11 @@ class Plist(IPersistent):
         yield current.value  # Tail's value
 
     def __repr__(self):
+        """Added in version: 0.1.0"""
         # iteration yields the value of the Node
         # not the node object
         return f"Plist{[i for i in self]}"
 
     def __len__(self):
+        """Added in version: 0.1.0"""
         return self.length
