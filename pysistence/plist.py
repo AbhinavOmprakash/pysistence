@@ -113,7 +113,10 @@ class Plist(IPersistent):
         return self.length
 
     def __eq__(self, plist:Plist):
-        return all(map(lambda s,o: s==o, self, plist))
+        if len(self) == len(plist):
+            return all(map(lambda s,o: s==o, self, plist))
+        else: 
+            return False
 
     def __lt__(self, plist:Plist):
         s_it = iter(self)

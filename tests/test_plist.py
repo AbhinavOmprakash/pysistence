@@ -69,6 +69,10 @@ def test_eq():
     pl2 = Plist([1, 2, 3,4])
     assert pl1 == pl2
 
+    pl1 = Plist([1, 2, 3])
+    pl2 = Plist([1, 2, 3,4])
+    assert not pl1 == pl2
+
 
 def test_lt():
     pl1 = Plist([1, 2, 3])
