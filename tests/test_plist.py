@@ -1,8 +1,23 @@
 from pysistence import Plist
+from pysistence.plist import ListNode
+
+def test_list_node():
+    n1 = ListNode(1)
+    n2 = ListNode(2)
+    assert n1 != n2
+    assert n1 < n2
+    assert n2 > n1
+
+    assert str(n1) == "1"
+    
+    n1.next = n2
+    assert str(n1.next) == "2"
+
+
 
 
 def test_iteration():
-    plist = Plist([1, 2, 3])
+    plist = Plist([1, 2, 3]) 
     assert [i for i in plist] == [1, 2, 3]
 
 
@@ -48,3 +63,27 @@ def test_representation():
 def test_length():
     plist = Plist([1, 2, 3])
     assert len(plist) == 3
+
+def test_eq():
+    pl1 = Plist([1, 2, 3,4])
+    pl2 = Plist([1, 2, 3,4])
+    assert pl1 == pl2
+
+
+def test_lt():
+    pl1 = Plist([1, 2, 3])
+    pl2 = Plist([1, 2, 3,4])
+    assert pl1 < pl2
+
+    pl1 = Plist([0,1, 2, 3])
+    pl2 = Plist([1, 2, 3,4])
+    assert pl1 < pl2
+
+    pl1 = Plist([0,3, 2, 3])
+    pl2 = Plist([1, 2, 3,4])
+    assert pl1 < pl2
+
+    pl1 = Plist([1, 2, 3,4])
+    pl2 = Plist([1, 2, 3,4])
+    assert not pl1 < pl2
+    assert not pl1 > pl2

@@ -1,10 +1,12 @@
 """a persistent linked list"""
 from __future__ import annotations
 from typing import Iterable, Any, final
+from functools import total_ordering
 from .ipersistent import IPersistent
 
 
-@final
+
+@total_ordering
 class ListNode:
     """This node class will be used with the persistent linked list.
     Added in version: 0.1.0
@@ -14,10 +16,16 @@ class ListNode:
         self.value = value
         self.next = nextNode
 
-    def __eq__(self, node):
+    def __eq__(self, node:ListNode):
         return self.value == node.value
 
+    def __lt__(self, node:ListNode):
+        return self.value < node.value
 
+    def __repr__(self):
+        return str(self.value)
+
+@total_ordering
 class Plist(IPersistent):
     """Persistent linked list with O(1) concatenation.
 
@@ -46,8 +54,8 @@ class Plist(IPersistent):
                 current = self.head
             else:
                 current.next = ListNode(element)
-
                 current = current.next
+
         self.tail = current
     
     def _copy_self(self):
@@ -103,3 +111,27 @@ class Plist(IPersistent):
     def __len__(self):
         """Added in version: 0.1.0"""
         return self.length
+
+    def __eq__(self, plist:Plist):
+        return all(map(lambda s,o: s==o, self, plist))
+
+    def __lt__(self, plist:Plist):
+        s_it = iter(self)
+        o_it = iter(plist)
+        try:
+            while s_it and o_it:
+                s_curr = next(s_it)
+                o_curr = next(o_it)
+                if s_curr != o_curr:
+                    return s_curr < o_curr
+        except: # if the iterator for one list is exhausted.
+            # happens if one list is longer than the other
+            return len(self) < len(plist)
+
+
+
+
+
+       
+
+

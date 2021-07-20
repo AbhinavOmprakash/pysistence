@@ -6,7 +6,6 @@ class IPersistent(ABC): # pragma: no cover
     def cons(self, value):
         pass
 
-
     @abstractmethod
     def conj(self, value):
         pass
