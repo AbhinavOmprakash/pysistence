@@ -11,6 +11,7 @@ class ListNode:
     """This node class will be used with the persistent linked list.
     Added in version: 0.1.0
     """
+    __slots__ = ["value", "next"]
 
     def __init__(self, value: Any, nextNode: ListNode = None) -> None:
         self.value = value
@@ -31,6 +32,7 @@ class Plist(IPersistent):
 
     Added in version: 0.1.0
     """
+    __slots__ = ["head", "tail", "length"]
 
     def __init__(self, iterable: Iterable) -> None:
         self.head: ListNode = None
