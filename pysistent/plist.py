@@ -34,12 +34,13 @@ class Plist(IPersistent):
     """
     __slots__ = ["head", "tail", "length"]
 
-    def __init__(self, iterable: Iterable) -> None:
+    def __init__(self, iterable: Iterable = None) -> None:
         self.head: ListNode = None
         self.tail: ListNode = None
         self.length: int = 0
 
-        self._construct(iterable)
+        if iterable:
+            self._construct(iterable)
 
     def _construct(self, iterable: Iterable) -> None:
         """Construct linked list from iterable.
@@ -63,7 +64,12 @@ class Plist(IPersistent):
     def _copy_self(self):
 
         """Added in version: 0.1.0"""
-        pass
+        new = Plist()
+        new.head = self.head
+        new.tail = self.tail
+        new.length = self.length
+
+        return new
         
 
     def cons(self, value):

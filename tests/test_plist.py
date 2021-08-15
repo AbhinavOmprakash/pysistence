@@ -1,5 +1,5 @@
-from pysistence import Plist
-from pysistence.plist import ListNode
+from pysistent import Plist
+from pysistent.plist import ListNode
 
 def test_list_node():
     n1 = ListNode(1)

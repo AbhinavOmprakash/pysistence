@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pysistence"
+name = "pysistent"
 version = "0.1.0"
 description = "Persistent data structures for python"
 authors = ["Abhinav Omprakash"]
@@ -7,6 +7,7 @@ license = "BSD-3-Clause"
 
 [tool.poetry.dependencies]
 python = "^3.8"
+functionali = "^0.1.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
