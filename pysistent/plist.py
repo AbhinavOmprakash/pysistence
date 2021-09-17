@@ -1,9 +1,8 @@
 """a persistent linked list"""
 from __future__ import annotations
-from typing import Iterable, Any, final
+from typing import Iterable, Any, List, final
 from functools import total_ordering
 from .ipersistent import IPersistent
-
 
 
 @total_ordering
@@ -88,12 +87,10 @@ class Plist(IPersistent):
     def concat(self, value):
         """Added in version: 0.1.0"""
         # make new list, copy self's head new list
-        new_plist = Plist([self.head.value])
-        # sets self tail to point to new tail
-        self.tail.next = ListNode(value)
-        # Set the value of the new list's tail
-        new_plist.tail = self.tail.next
-        new_plist.length = self.length + 1
+        new_plist = self._copy_self()
+        new_plist.tail.next = ListNode(value)
+        new_plist.tail = new_plist.tail.next
+        new_plist.length += 1
         return new_plist
 
     # def insert(self,index, value):
@@ -122,7 +119,9 @@ class Plist(IPersistent):
 
     def __eq__(self, plist:Plist):
         if len(self) == len(plist):
-            return all(map(lambda s,o: s==o, self, plist))
+            return all(map(lambda s,o: s==o, 
+                            self, 
+                            plist))
         else: 
             return False
 
